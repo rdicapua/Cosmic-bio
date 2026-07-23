@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cosmic Biorhythm | Mary Celeste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream:      #faf7f2;
+  --parchment:  #f0ebe0;
+  --white:      #ffffff;
+  --navy:       #0f1f3d;
+  --navy-deep:  #091528;
+  --navy-mid:   #162848;
+  --ink:        #1a1612;
+  --ink-soft:   #3a3228;
+  --gold:       #c9a84c;
+  --gold-light: #e0c070;
+  --gold-dim:   rgba(201,168,76,0.25);
+  --rust:       #8b3a2a;
+  --muted:      #7a6f5e;
+  --muted-navy: rgba(255,255,255,0.55);
+  --rule-light: #d8cfc0;
+  --rule-navy:  rgba(201,168,76,0.2);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Lato',sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.7;
+}
+
+/* ── NAV ── */
+nav {
+  background:var(--navy-deep);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 56px;
+  position:sticky; top:0; z-index:200;
+  border-bottom:2px solid var(--gold-dim);
+}
+.nav-brand {
+  font-family:'Cinzel',serif;
+  font-size:1rem; letter-spacing:0.35em;
+  color:var(--gold-light);
+  text-decoration:none; text-transform:uppercase;
+}
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a {
+  font-size:0.8rem; letter-spacing:0.15em;
+  color:var(--muted-navy); text-decoration:none;
+  text-transform:uppercase; transition:color 0.2s;
+}
+.nav-links a:hover { color:var(--gold-light); }
+
+/* ── HERO ── */
+.hero {
+  background:var(--navy);
+  color:var(--cream);
+  padding:90px 56px 100px;
+  position:relative; overflow:hidden;
+}
+.hero::before {
+  content:'✦';
+  position:absolute; right:-20px; top:50%;
+  transform:translateY(-50%);
+  font-size:30rem; opacity:0.025; line-height:1;
+  pointer-events:none;
+}
+.hero-inner {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; align-items:center;
+  max-width:1200px; margin:0 auto;
+  position:relative; z-index:1;
+}
+.hero h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-weight:400;
+  font-size:clamp(3.2rem,6vw,5.8rem);
+  line-height:1.0; margin-bottom:28px;
+  letter-spacing:-0.01em;
+}
+.hero h1 em { font-style:italic; color:var(--gold-light); }
+.hero-sub {
+  font-size:1.05rem; line-height:1.85;
+  color:var(--muted-navy); max-width:420px; margin-bottom:40px;
+}
+.hero-cta {
+  display:inline-block; padding:15px 40px;
+  background:var(--gold); color:var(--navy-deep);
+  font-family:'Cinzel',serif; font-size:0.75rem;
+  letter-spacing:0.3em; text-transform:uppercase;
+  text-decoration:none; font-weight:600;
+  transition:background 0.2s, transform 0.2s;
+}
+.hero-cta:hover { background:var(--gold-light); transform:translateY(-2px); }
+.hero-cta-secondary {
+  display:inline-block; margin-left:18px;
+  padding:14px 32px;
+  border:1px solid rgba(201,168,76,0.45);
+  color:var(--gold-light);
+  font-family:'Cinzel',serif; font-size:0.75rem;
+  letter-spacing:0.25em; text-transform:uppercase;
+  text-decoration:none;
+  transition:border-color 0.2s, color 0.2s;
+}
+.hero-cta-secondary:hover { border-color:var(--gold-light); color:#fff; }
+
+.hero-visual {
+  display:grid; grid-template-columns:1fr 1fr; gap:2px;
+}
+.hero-stat {
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--rule-navy);
+  padding:28px 32px;
+}
+.hero-stat-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem; font-weight:400;
+  color:var(--gold-light); line-height:1; margin-bottom:6px;
+}
+.hero-stat-label {
+  font-size:0.75rem; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--muted-navy);
+}
+.hero-stat.full { grid-column:1/-1; }
+.hero-stat.full .hero-stat-num { font-size:2rem; }
+
+/* ── SHARED ── */
+.section-wrap { max-width:1200px; margin:0 auto; padding:72px 56px; }
+.section-head {
+  display:flex; align-items:baseline; gap:24px;
+  margin-bottom:44px; padding-bottom:18px;
+}
+.section-head h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.6rem; font-weight:600; line-height:1;
+}
+.section-head h2 em { font-style:italic; }
+.section-tag {
+  font-family:'Cinzel',serif;
+  font-size:0.65rem; letter-spacing:0.4em; text-transform:uppercase;
+}
+.bg-cream  { background:var(--cream); }
+.bg-parch  { background:var(--parchment); border-top:1px solid var(--rule-light); border-bottom:1px solid var(--rule-light); }
+.bg-white  { background:var(--white); }
+.bg-navy   { background:var(--navy); color:var(--cream); }
+.bg-navy-d { background:var(--navy-deep); color:var(--cream); }
+
+.bg-cream .section-head,
+.bg-parch .section-head,
+.bg-white .section-head { border-bottom:2px solid var(--ink); }
+.bg-cream .section-head h2 em,
+.bg-parch .section-head h2 em,
+.bg-white .section-head h2 em { color:var(--gold); }
+.bg-cream .section-tag,
+.bg-parch .section-tag,
+.bg-white .section-tag { color:var(--muted); }
+.bg-navy  .section-head,
+.bg-navy-d .section-head { border-bottom:1px solid var(--rule-navy); }
+.bg-navy  .section-head h2 em,
+.bg-navy-d .section-head h2 em { color:var(--gold-light); }
+.bg-navy  .section-tag,
+.bg-navy-d .section-tag { color:var(--muted-navy); }
+
+/* ── WHAT IS THIS ── */
+.what-grid {
+  display:grid; grid-template-columns:1fr 1fr 1fr; gap:3px;
+}
+.what-card {
+  background:var(--white);
+  border:1px solid var(--rule-light);
+  border-top:4px solid var(--gold);
+  padding:36px 32px;
+}
+.what-icon { font-size:2rem; margin-bottom:16px; display:block; }
+.what-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.45rem; font-weight:600;
+  color:var(--ink); margin-bottom:12px; line-height:1.2;
+}
+.what-title em { font-style:italic; }
+.what-desc { font-size:0.95rem; color:var(--ink-soft); line-height:1.75; }
+
+/* ── THE MATHEMATICS ── */
+.math-row {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+}
+.math-card {
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--rule-navy);
+  padding:36px 28px;
+  position:relative; overflow:hidden;
+}
+.math-card::before {
+  content:'';
+  position:absolute; top:0; left:0;
+  height:3px; width:100%;
+  background:var(--gold);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.math-card:hover::before { transform:scaleX(1); }
+.math-symbol {
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.5rem; font-style:italic;
+  color:var(--gold-light); line-height:1;
+  margin-bottom:10px;
+}
+.math-cycle-name {
+  font-family:'Cinzel',serif;
+  font-size:0.65rem; letter-spacing:0.35em;
+  text-transform:uppercase; color:var(--gold);
+  margin-bottom:6px;
+}
+.math-days {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem; font-weight:600; color:var(--cream);
+  margin-bottom:12px;
+}
+.math-desc {
+  font-size:0.88rem; line-height:1.65; color:var(--muted-navy);
+}
+
+/* ── FINGERPRINT ── */
+.fp-feature {
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--rule-navy);
+  padding:56px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:72px; align-items:center;
+  margin-top:16px;
+}
+.fp-number {
+  font-family:'Cormorant Garamond',serif;
+  font-size:5rem; font-style:italic;
+  color:var(--gold-light); line-height:1;
+  margin-bottom:12px;
+  text-shadow:0 0 40px rgba(201,168,76,0.2);
+}
+.fp-label {
+  font-family:'Cinzel',serif;
+  font-size:0.65rem; letter-spacing:0.4em;
+  text-transform:uppercase; color:var(--gold);
+  margin-bottom:8px;
+}
+.fp-tier {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem; font-weight:600; color:var(--cream);
+  margin-bottom:18px;
+}
+.fp-prose {
+  font-size:1rem; line-height:1.85;
+  color:var(--muted-navy); margin-bottom:24px;
+}
+.fp-tiers { display:flex; flex-direction:column; gap:10px; }
+.fp-tier-row {
+  display:grid; grid-template-columns:auto 1fr auto;
+  align-items:center; gap:16px;
+  padding:14px 20px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--rule-navy);
+}
+.fp-tier-score {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem; font-style:italic; color:var(--gold-light);
+  width:56px; text-align:center;
+}
+.fp-tier-name {
+  font-size:0.88rem; color:var(--cream);
+}
+.fp-tier-bar {
+  width:80px; height:3px;
+  background:rgba(255,255,255,0.08); border-radius:2px;
+  overflow:hidden;
+}
+.fp-tier-fill { height:100%; background:var(--gold); border-radius:2px; }
+
+/* ── HOW IT WORKS ── */
+.steps { display:flex; flex-direction:column; gap:3px; }
+.step-row {
+  display:grid; grid-template-columns:72px 1fr;
+  align-items:start; gap:36px;
+  padding:28px 36px;
+  background:var(--white);
+  border:1px solid var(--rule-light);
+  transition:border-color 0.25s, box-shadow 0.25s;
+}
+.step-row:hover {
+  border-color:var(--gold);
+  box-shadow:4px 0 0 0 var(--gold), 0 6px 24px rgba(201,168,76,0.1);
+}
+.step-num {
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem; font-weight:400; font-style:italic;
+  color:var(--rule-light); line-height:1;
+  text-align:center; transition:color 0.25s;
+}
+.step-row:hover .step-num { color:var(--gold); }
+.step-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem; font-weight:600;
+  color:var(--ink); margin-bottom:6px;
+}
+.step-title em { font-style:italic; }
+.step-desc { font-size:0.93rem; color:var(--muted); line-height:1.65; }
+
+/* ── ORACLE SAMPLE ── */
+.oracle-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.oracle-card {
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--rule-navy);
+  padding:32px 28px 26px;
+  display:flex; flex-direction:column; gap:10px;
+  position:relative; overflow:hidden;
+  transition:border-color 0.25s, background 0.25s;
+}
+.oracle-card::before {
+  content:'';
+  position:absolute; top:0; left:0;
+  height:3px; width:100%; background:var(--gold);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.oracle-card:hover { border-color:var(--gold); background:rgba(201,168,76,0.05); }
+.oracle-card:hover::before { transform:scaleX(1); }
+.oracle-sym {
+  font-size:1.8rem; line-height:1;
+}
+.oracle-cycle {
+  font-family:'Cinzel',serif;
+  font-size:0.65rem; letter-spacing:0.3em;
+  text-transform:uppercase; color:var(--gold);
+}
+.oracle-badge {
+  display:inline-block; padding:3px 12px;
+  background:rgba(201,168,76,0.15);
+  border:1px solid var(--rule-navy);
+  font-family:'Cinzel',serif;
+  font-size:0.65rem; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--gold-light);
+  width:fit-content;
+}
+.oracle-text {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.08rem; font-style:italic;
+  font-weight:400; line-height:1.7;
+  color:var(--cream); flex:1;
+}
+
+/* ── PROPHECY FEATURE ── */
+.prophecy-box {
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--rule-navy);
+  padding:48px 56px;
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+.prophecy-box::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(201,168,76,0.5),transparent);
+}
+.prophecy-eyebrow {
+  font-family:'Cinzel',serif;
+  font-size:0.65rem; letter-spacing:0.4em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:18px;
+}
+.prophecy-date {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.8rem; font-weight:600; font-style:italic;
+  color:var(--gold-light); margin-bottom:8px;
+}
+.prophecy-away {
+  font-family:'Cinzel',serif;
+  font-size:0.75rem; letter-spacing:0.25em;
+  text-transform:uppercase; color:var(--muted-navy); margin-bottom:24px;
+}
+.prophecy-prose {
+  font-size:1.05rem; line-height:1.85;
+  color:var(--muted-navy); max-width:580px; margin:0 auto 32px;
+}
+.prophecy-cta {
+  display:inline-block; padding:14px 36px;
+  background:var(--gold); color:var(--navy-deep);
+  font-family:'Cinzel',serif; font-size:0.72rem;
+  letter-spacing:0.3em; text-transform:uppercase;
+  text-decoration:none; font-weight:600;
+  transition:background 0.2s, transform 0.2s;
+}
+.prophecy-cta:hover { background:var(--gold-light); transform:translateY(-2px); }
+
+/* ── LAUNCH CTA ── */
+.launch-wrap {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:3px;
+}
+.launch-main {
+  background:var(--gold);
+  padding:56px 48px;
+  display:flex; flex-direction:column; justify-content:space-between;
+}
+.launch-main h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.6rem; font-weight:400; font-style:italic;
+  color:var(--navy-deep); line-height:1.1; margin-bottom:20px;
+}
+.launch-main p {
+  font-size:1rem; line-height:1.8;
+  color:rgba(9,21,40,0.75); margin-bottom:32px; max-width:380px;
+}
+.launch-btn {
+  display:inline-block; padding:16px 40px;
+  background:var(--navy-deep); color:var(--gold-light);
+  font-family:'Cinzel',serif; font-size:0.75rem;
+  letter-spacing:0.3em; text-transform:uppercase;
+  text-decoration:none; font-weight:600;
+  transition:background 0.2s, transform 0.2s;
+  width:fit-content;
+}
+.launch-btn:hover { background:#0d1e3a; transform:translateY(-2px); }
+.launch-side {
+  background:var(--navy-deep);
+  padding:56px 48px;
+  display:flex; flex-direction:column; gap:24px;
+}
+.launch-feature {
+  border-bottom:1px solid var(--rule-navy);
+  padding-bottom:20px;
+}
+.launch-feature:last-child { border-bottom:none; padding-bottom:0; }
+.launch-feature-label {
+  font-family:'Cinzel',serif;
+  font-size:0.65rem; letter-spacing:0.3em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:6px;
+}
+.launch-feature-text {
+  font-size:0.93rem; line-height:1.65; color:var(--muted-navy);
+}
+
+/* ── BACK LINK ── */
+.back-bar {
+  background:var(--parchment);
+  border-top:1px solid var(--rule-light);
+  border-bottom:1px solid var(--rule-light);
+  padding:18px 56px;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.back-link {
+  font-family:'Cinzel',serif;
+  font-size:0.72rem; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--gold);
+  text-decoration:none; transition:color 0.2s;
+}
+.back-link:hover { color:var(--ink); }
+.back-tagline {
+  font-size:0.85rem; color:var(--muted);
+  font-style:italic;
+}
+
+/* ── FOOTER ── */
+footer {
+  background:var(--navy-deep); color:var(--cream);
+  border-top:3px solid var(--gold); padding:56px;
+}
+.footer-inner {
+  max-width:1200px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:28px;
+}
+.footer-brand {
+  font-family:'Cinzel',serif;
+  font-size:0.75rem; letter-spacing:0.35em;
+  color:var(--gold); text-transform:uppercase;
+}
+.footer-brand span {
+  display:block; font-family:'Cormorant Garamond',serif;
+  font-size:2rem; font-weight:400; letter-spacing:0.06em;
+  color:var(--cream); margin-top:4px;
+}
+.footer-copy {
+  font-size:0.78rem; color:rgba(250,247,242,0.4);
+  text-align:right; line-height:1.6;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width:960px) {
+  nav { padding:16px 24px; }
+  .nav-links { display:none; }
+  .hero { padding:56px 24px 64px; }
+  .hero-inner { grid-template-columns:1fr; gap:40px; }
+  .hero-visual { grid-template-columns:1fr 1fr; }
+  .section-wrap { padding:52px 24px; }
+  .what-grid { grid-template-columns:1fr; }
+  .math-row { grid-template-columns:1fr; }
+  .fp-feature { grid-template-columns:1fr; gap:36px; padding:32px; }
+  .oracle-grid { grid-template-columns:1fr; }
+  .launch-wrap { grid-template-columns:1fr; }
+  .back-bar { padding:16px 24px; flex-direction:column; gap:8px; align-items:flex-start; }
+  footer { padding:40px 24px; }
+  .footer-inner { flex-direction:column; align-items:flex-start; }
+  .footer-copy { text-align:left; }
+}
+@media (max-width:600px) {
+  .hero-visual { grid-template-columns:1fr 1fr; }
+  .hero-stat.full { grid-column:1/-1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://rdicapua.github.io/Mary-Celeste/" class="nav-brand">⚓ &nbsp;Mary Celeste</a>
+  <ul class="nav-links">
+    <li><a href="#what">What It Is</a></li>
+    <li><a href="#mathematics">The Mathematics</a></li>
+    <li><a href="#oracle">The Oracle</a></li>
+    <li><a href="#prophecy">Prophecy</a></li>
+    <li><a href="#launch">Launch App</a></li>
+    <li><a href="https://rdicapua.github.io/Mary-Celeste/">← Mary Celeste</a></li>
+  </ul>
+</nav>
+
+<!-- BACK BAR -->
+<div class="back-bar">
+  <a href="https://rdicapua.github.io/Mary-Celeste/" class="back-link">← Back to Mary Celeste</a>
+  <span class="back-tagline">An interactive tool from Madelena Kishner &amp; Riccardo Di Capua</span>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Your cosmos,<br><em>written</em><br>at birth.</h1>
+      <p class="hero-sub">Three irrational cycles — lunar, golden, transcendental — anchored to the exact moment you entered the world. A fingerprint in time that has never existed before, and never will again.</p>
+      <a href="https://rdicapua.github.io/Cosmic-bio/app.html" class="hero-cta" target="_blank">Open the App</a>
+      <a href="#what" class="hero-cta-secondary">Learn More</a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-stat">
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Cosmic Cycles</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1:φ:π</div>
+        <div class="hero-stat-label">The Ratio</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">∞</div>
+        <div class="hero-stat-label">Unique Dates</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">0</div>
+        <div class="hero-stat-label">Repeated Patterns</div>
+      </div>
+      <div class="hero-stat full">
+        <div class="hero-stat-num" style="font-size:1.8rem">74.3812</div>
+        <div class="hero-stat-label">Sample Fingerprint Score · Once in a Century</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT IS THIS -->
+<section id="what" class="bg-cream">
+  <div class="section-wrap">
+    <div class="section-head">
+      <h2>What <em>It Is</em></h2>
+      <span class="section-tag">The Concept</span>
+    </div>
+    <div class="what-grid">
+      <div class="what-card">
+        <span class="what-icon">🌙</span>
+        <div class="what-title">A Personal <em>Clock</em></div>
+        <div class="what-desc">Enter your date of birth and three sine waves begin their count from that exact day. Every reading is unique to you — your birthday is the anchor from which all three cycles flow, never the same for any two people born on different days.</div>
+      </div>
+      <div class="what-card">
+        <span class="what-icon">φ</span>
+        <div class="what-title">Beautiful <em>Mathematics</em></div>
+        <div class="what-desc">The three cycles are scaled by the most profound constants in mathematics: 1, the golden ratio φ, and π. Because φ and π are both irrational and incommensurate with each other, the three waves never simultaneously return to zero. Your pattern is, in the strictest mathematical sense, unrepeatable.</div>
+      </div>
+      <div class="what-card">
+        <span class="what-icon">🔮</span>
+        <div class="what-title">A Theatrical <em>Oracle</em></div>
+        <div class="what-desc">Originally built for magic show performances, the app generates richly written predictions for any date — tonight, an anniversary, a first meeting. It also finds your next triple peak, when all three cycles crest simultaneously, and presents it as a personal prophecy worth circling on the calendar.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE MATHEMATICS -->
+<section id="mathematics" class="bg-navy">
+  <div class="section-wrap">
+    <div class="section-head">
+      <h2>The <em>Mathematics</em></h2>
+      <span class="section-tag">Three Cycles · One Ratio</span>
+    </div>
+    <div class="math-row">
+      <div class="math-card">
+        <div class="math-symbol">♀</div>
+        <div class="math-cycle-name">Emotional · Venus</div>
+        <div class="math-days">29.53 days &nbsp;·&nbsp; ×1</div>
+        <div class="math-desc">Anchored to the lunar month — the oldest human calendar. The fastest of the three cycles, its peaks bring warmth, openness, and magnetic presence; its troughs heighten sensitivity and draw the self inward.</div>
+      </div>
+      <div class="math-card">
+        <div class="math-symbol">♂</div>
+        <div class="math-cycle-name">Physical · Mars</div>
+        <div class="math-days">47.77 days &nbsp;·&nbsp; ×φ</div>
+        <div class="math-desc">The lunar month multiplied by the golden ratio φ = 1.6180339… — the proportion found in nautilus shells, sunflower heads, and the human hand. At its zenith, power, coordination, and physical grace align in a harmony that nature spent millennia designing.</div>
+      </div>
+      <div class="math-card">
+        <div class="math-symbol">♃</div>
+        <div class="math-cycle-name">Intellectual · Jupiter</div>
+        <div class="math-days">92.77 days &nbsp;·&nbsp; ×π</div>
+        <div class="math-desc">The lunar month multiplied by π = 3.14159… — the transcendental ratio of a circle's circumference to its diameter. The slowest and deepest wave. When it crests, the full circle of thought opens: synthesis, revelation, and the kind of clarity that makes difficult things look effortless.</div>
+      </div>
+    </div>
+
+    <div class="fp-feature">
+      <div>
+        <div class="fp-label">Temporal Signature</div>
+        <div class="fp-number">74.3812</div>
+        <div class="fp-tier">Once in a Century</div>
+        <div class="fp-prose">The Cosmic Fingerprint Score is a six-decimal number computed from the interference of all three cycle phases on a specific date. Because the ratios 1 : φ : π are mutually irrational, no two dates in history produce the same score. The number is yours alone.</div>
+        <a href="https://rdicapua.github.io/Cosmic-bio/app.html" class="hero-cta" target="_blank" style="margin-top:8px">Compute Yours</a>
+      </div>
+      <div class="fp-tiers">
+        <div class="fp-tier-row">
+          <div class="fp-tier-score">85+</div>
+          <div class="fp-tier-name">Once in millennia</div>
+          <div class="fp-tier-bar"><div class="fp-tier-fill" style="width:100%"></div></div>
+        </div>
+        <div class="fp-tier-row">
+          <div class="fp-tier-score">70+</div>
+          <div class="fp-tier-name">Once in a century</div>
+          <div class="fp-tier-bar"><div class="fp-tier-fill" style="width:82%"></div></div>
+        </div>
+        <div class="fp-tier-row">
+          <div class="fp-tier-score">55+</div>
+          <div class="fp-tier-name">Once in a generation</div>
+          <div class="fp-tier-bar"><div class="fp-tier-fill" style="width:64%"></div></div>
+        </div>
+        <div class="fp-tier-row">
+          <div class="fp-tier-score">40+</div>
+          <div class="fp-tier-name">Rare alignment</div>
+          <div class="fp-tier-bar"><div class="fp-tier-fill" style="width:47%"></div></div>
+        </div>
+        <div class="fp-tier-row">
+          <div class="fp-tier-score">0+</div>
+          <div class="fp-tier-name">Uncommon pattern</div>
+          <div class="fp-tier-bar"><div class="fp-tier-fill" style="width:28%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="bg-parch">
+  <div class="section-wrap">
+    <div class="section-head">
+      <h2>How It <em>Works</em></h2>
+      <span class="section-tag">Four Steps</span>
+    </div>
+    <div class="steps">
+      <div class="step-row">
+        <div class="step-num">I</div>
+        <div>
+          <div class="step-title">Enter your <em>date of birth</em></div>
+          <div class="step-desc">The app anchors all three cycles to the day you were born. Your birth date is the origin point — the moment from which lunar, golden, and transcendental time begins its count. Returning visitors are remembered; the app recalls the last reading automatically.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">II</div>
+        <div>
+          <div class="step-title">Read the <em>three cycles</em></div>
+          <div class="step-desc">Three animated sine curves display your Emotional, Physical, and Intellectual cycles across a ±20-day window centered on tonight. Each curve shows a glowing dot at the present moment. Swipe left or right to travel through time; tap any date to jump directly to it.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">III</div>
+        <div>
+          <div class="step-title">Discover your <em>fingerprint score</em></div>
+          <div class="step-desc">A six-decimal number — computed from the interference of all three cycles on this exact date — appears with a rarity rating. The mathematics guarantee it has never occurred before in precisely this form. A meter and a dramatic label complete the reveal.</div>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">IV</div>
+        <div>
+          <div class="step-title">Receive the <em>oracle & prophecy</em></div>
+          <div class="step-desc">Three richly written predictions, one per cycle, drawn from a rotating bank of theatrical texts. Below them, the app scans up to two years ahead and identifies the next date when all three cycles surge high simultaneously — your personal triple peak, presented as a prophecy worth marking on the calendar.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORACLE SAMPLES -->
+<section id="oracle" class="bg-navy">
+  <div class="section-wrap">
+    <div class="section-head">
+      <h2>The <em>Oracle</em></h2>
+      <span class="section-tag">Sample Readings</span>
+    </div>
+    <div class="oracle-grid">
+      <div class="oracle-card">
+        <div class="oracle-sym">♀</div>
+        <div class="oracle-cycle">Emotional · Venus · Peak</div>
+        <div class="oracle-badge">PEAK</div>
+        <div class="oracle-text">"Venus blazes at full radiance. Every word you speak carries warmth, magnetism, and grace. The audience feels it before you utter a sound. Let yourself be seen — the cosmos has dressed you in light."</div>
+      </div>
+      <div class="oracle-card">
+        <div class="oracle-sym">♂</div>
+        <div class="oracle-cycle">Physical · Mars · Balanced</div>
+        <div class="oracle-badge">BALANCED</div>
+        <div class="oracle-text">"The golden spiral breathes at its calm equatorial point. This is the body at its most sustainable — capable of anything asked of it. A night for elegant efficiency rather than explosive force."</div>
+      </div>
+      <div class="oracle-card">
+        <div class="oracle-sym">♃</div>
+        <div class="oracle-cycle">Intellectual · Jupiter · Low</div>
+        <div class="oracle-badge">DESCENDING</div>
+        <div class="oracle-text">"The π-curve bottoms here. This is the moment just before the circle begins again — the held breath before the next revolution. Rest the analytical mind; let intuition take the shift. It has been waiting patiently for exactly this opening."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPHECY -->
+<section id="prophecy" class="bg-navy-d">
+  <div class="section-wrap">
+    <div class="section-head">
+      <h2>The <em>Prophecy</em></h2>
+      <span class="section-tag">Next Triple Alignment</span>
+    </div>
+    <div class="prophecy-box">
+      <div class="prophecy-eyebrow">✦ &nbsp; Next Triple Alignment &nbsp; ✦</div>
+      <div class="prophecy-date">Wednesday, 14 January 2026</div>
+      <div class="prophecy-away">In 178 days · for a sample birth date</div>
+      <div class="prophecy-prose">On this day all three cosmic currents surge toward their zenith simultaneously. The app marks it on your personal calendar and presents it as what it truly is: an appointment the universe has made with you. Mark it. Something will be possible on that day that is not possible on any other.</div>
+      <a href="https://rdicapua.github.io/Cosmic-bio/app.html" class="prophecy-cta" target="_blank">Find Your Alignment</a>
+    </div>
+  </div>
+</section>
+
+<!-- LAUNCH CTA -->
+<section id="launch" class="bg-cream">
+  <div class="section-wrap" style="padding-top:0;padding-bottom:0">
+    <div class="launch-wrap">
+      <div class="launch-main">
+        <div>
+          <h2>The cosmos is<br>ready for you.</h2>
+          <p>Open the app on any phone, tablet, or desktop. Save multiple profiles, share a beautiful reading card, and return as often as you like — your birth date is remembered between visits.</p>
+          <a href="https://rdicapua.github.io/Cosmic-bio/app.html" class="launch-btn" target="_blank">✦ &nbsp; Open Cosmic Biorhythm &nbsp; ✦</a>
+        </div>
+      </div>
+      <div class="launch-side">
+        <div class="launch-feature">
+          <div class="launch-feature-label">✦ &nbsp; Saved Profiles</div>
+          <div class="launch-feature-text">Store multiple birth dates by name. Return for a reading at any time — the app recalls the last visitor automatically.</div>
+        </div>
+        <div class="launch-feature">
+          <div class="launch-feature-label">✦ &nbsp; Share Card</div>
+          <div class="launch-feature-text">Generate a beautiful portrait image of the full reading — chart, scores, fingerprint, oracle — and save it to your camera roll.</div>
+        </div>
+        <div class="launch-feature">
+          <div class="launch-feature-label">✦ &nbsp; Install as App</div>
+          <div class="launch-feature-text">Open in Chrome on Android or Safari on iPhone, then Add to Home Screen. It runs offline, full-screen, like a native app.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      ✦ &nbsp;Cosmic Biorhythm
+      <span>A Mary Celeste Tool</span>
+    </div>
+    <div style="font-size:0.88rem;color:rgba(250,247,242,0.5);font-style:italic;text-align:center">
+      Cycles in ratio 1 : φ : π &nbsp;·&nbsp; anchored to birth &nbsp;·&nbsp; every pattern unique
+    </div>
+    <div class="footer-copy">
+      <a href="https://rdicapua.github.io/Mary-Celeste/" style="color:var(--gold-light);text-decoration:none;font-size:0.8rem;letter-spacing:0.15em;">⚓ &nbsp;Mary Celeste &nbsp;→</a><br>
+      <span style="color:rgba(250,247,242,0.3);font-size:0.75rem">Stories Worth Keeping</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
